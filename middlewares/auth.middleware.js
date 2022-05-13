@@ -1,3 +1,5 @@
+
+// CHECKS FOR THE AUTHENTICATION HEADER AND CALLS NEXT IF EXISTS
 const isAuthorizedOrNot = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) return res.status(400).send("Not authorized");

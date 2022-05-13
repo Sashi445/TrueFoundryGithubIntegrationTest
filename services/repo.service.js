@@ -3,6 +3,8 @@ const config = require("./../config");
 const Repo = require("./../models/repo.model");
 
 module.exports = {
+
+  // get gitignore templates from github API
   getGitignoreTemplates: async () => {
     try {
       const response = await axios.get(
@@ -15,6 +17,7 @@ module.exports = {
     }
   },
 
+  // Create Repo for user on github requires accessToken and data for creating repo
   createRepoForUser: async (repoData, accessToken) => {
     const { name, description, homepage, isPrivate, template } = repoData;
     try {
@@ -38,6 +41,7 @@ module.exports = {
     }
   },
 
+  // function for creating a copy of repo data on the server DB
   createRepoOnDb: async (repoData) => {
     try {
       const repo = await Repo.create(repoData);
@@ -49,6 +53,7 @@ module.exports = {
     }
   },
 
+  // returns the repos created by the user from this server.
   getRepos: async (userId) => {
     try {
       return await Repo.findAll({
@@ -62,6 +67,7 @@ module.exports = {
     }
   },
 
+  // creates content on the selected repo requires accessToken
   createContentOnRepo: async (data, accessToken) => {
     console.log(data, accessToken);
 
