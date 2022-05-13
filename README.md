@@ -13,7 +13,7 @@ a simple web application where user can create a github repository with a gitign
 
 #### Login Screen
 
-![](/demo-images/login-screen.png)
+![](./demo-images/login-screen.png)
 
 User has to give permission and login to the site this will take you to home page where user will be shown repos created from this site.
 
@@ -25,3 +25,19 @@ In Homepage, user will have option to create repo and add contents to existing r
 
 #### Create Repo Page
 
+![](/demo-images/create-repo-form.png)
+
+In create-repo page user can fill in repo details and choose one gitignore template and create a repo this will redirect to home on successful creation
+
+#### Create Repo Content Page
+
+![](/demo-images/create-repo-content.png)
+
+In create-repocontent page user can fill in new file content data and commit changes to the repo on successful commit it will redirect you to the home screen.
+
+#### Resources created on github
+
+The following content as created on github according to the data collected in website.
+
+![](/demo-images/github-content.png)
+![](/demo-images/file-content.png)
