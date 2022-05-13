@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/@webpixels/css@1.0/dist/index.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0 py-3">
+        <div class="container-xl">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <h2 class="text-white">TrueFoundry</h2>
+            </a>
+            <!-- Navbar toggle -->
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <form id="create-file" action="">
+            <div class="mb-3">
+                <label for="path" class="form-label">File Path</label>
+                <input class="form-control" type="text" name="path" id="" placeholder="path">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">File Content</label>
+                <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Commit Message</label>
+                <input class="form-control" type="text" name="message">
+            </div>
+            <div class="text-end">
+                <button class="btn btn-outline-success" type="submit">Create</button>
+            </div>
+        </form>
+    </div>
+    <script src="./../scripts/config.js"></script>
+    <script>
+
+        const queryString = window.location.search;
+
+        const urlSearchParams = new URLSearchParams(queryString);
+
+        const repo = urlSearchParams.get('repo');
+
+        console.log(repo);
+
+        const form = document.getElementById("create-file");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const message = form.elements["message"].value;
+            const content = form.elements["content"].value;
+            const path = form.elements["path"].value;
+            const owner = localStorage.getItem("name");
+            const accessToken = localStorage.getItem("accessToken");
+            fetch(
+                `${backendUrl}/repos/content`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({ repo, message, content, path, owner }),
+                    headers: {
+                        "accept": "application/json",
+                        "Content-Type": "application/json",
+                        "authorization": `Bearer ${accessToken}`
+                    }
+                }
+            )
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    window.location.replace("/pages/home.html")
+                })
+                .catch(err => {
+                    console.log(error.message);
+                    alert(error.message);
+                })
+
+        })
+
+    </script>
+</body>
+
+</html>
